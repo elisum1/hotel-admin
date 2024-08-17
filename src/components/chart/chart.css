@@ -1,0 +1,30 @@
+.chart {
+  flex: 4;
+  @apply shadow-lg rounded-lg p-5 bg-gradient-to-r from-green-400 to-blue-500 relative;
+}
+.chart .title {
+  @apply text-xl font-semibold mb-4;
+}
+.chart .chartGrid {
+  stroke: #ffffff;
+}
+.chart .hotel-icon {
+  width: 50px;
+  height: 50px;
+}
+.chart .airplane {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  animation: fly 5s linear infinite;
+}
+@keyframes fly {
+  0% {
+    left: -50px;
+  }
+  100% {
+    left: 100%;
+  }
+}/*# sourceMappingURL=chart.css.map */
