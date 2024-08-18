@@ -2,7 +2,6 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-// import { AuthContext } from "../../context/AuthContext";
 import "./login.scss";
 
 const Login = () => {
@@ -12,7 +11,6 @@ const Login = () => {
   });
 
   const { loading, error, dispatch } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,16 +20,25 @@ const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
+
     try {
-      const res = await axios.post("https://api-xm8x.onrender.com/api/auth/login", credentials);
+      const res = await axios.post(
+        "https://api-xm8x.onrender.com/api/auth/login",
+        credentials,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Asegúrate de incluir esto para permitir el envío de cookies
+        }
+      );
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-
         navigate("/");
       } else {
         dispatch({
           type: "LOGIN_FAILURE",
-          payload: { message: "No estas autenticado!" },
+          payload: { message: "No estás autenticado!" },
         });
       }
     } catch (err) {
