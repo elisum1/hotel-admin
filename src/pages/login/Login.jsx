@@ -23,13 +23,13 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "https://api-xm8x.onrender.com/api/auth/login",
+        "https://api-xm8x.onrender.com/api/auth/login", // Usamos la propiedad proxy en desarrollo
         credentials,
         {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true, // Asegúrate de incluir esto para permitir el envío de cookies
+          withCredentials: true, // Necesario para enviar cookies y credenciales
         }
       );
       if (res.data.isAdmin) {
