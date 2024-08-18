@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 
-const Datatable = ({ columns }) => {
+const Datatable = ({columns}) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-
+  
   // Inicializamos la lista como un array vacío para evitar problemas con `rows`
   const [list, setList] = useState([]);
   const { data, loading, error } = useFetch(`/${path}`);
-
+  
   // Aseguramos que la lista se actualiza cuando los datos cambian
   useEffect(() => {
     setList(data);
@@ -23,7 +23,7 @@ const Datatable = ({ columns }) => {
       await axios.delete(`/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {
-      console.error(err); // Añadido console.error para capturar errores
+      console.error(err);  // Añadido console.error para capturar errores
     }
   };
 
@@ -35,10 +35,7 @@ const Datatable = ({ columns }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link
-              to={`/${path}/${params.row._id}`}
-              style={{ textDecoration: "none" }}
-            >
+            <Link to={`/${path}/${params.row._id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
